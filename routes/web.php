@@ -3,7 +3,7 @@
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 
-use Illuminate\Support\Str;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +21,9 @@ $router->get('/', function () use ($router) {
 });
 
 // Generate Application Key 
-$router->get('/key', function () {
-    return Str::random(32);
-});
+$router->get('/key', 'ExampleController@generateKey');
+
+$router->post('/foo', 'ExampleController@fooExample');
 
 // $router->get('/foo', function () {
 //     return 'Hello, GET Method';
