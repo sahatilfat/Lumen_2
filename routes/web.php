@@ -53,3 +53,21 @@ $router->delete('/delete', function () {
 $router->options('/options', function () {
     return 'OPTIONS';
 });
+
+// -----------------------------------
+$router->get('/user/{id}', function ($id) {
+    return 'User id : = ' . $id;
+});
+
+
+// contoh penggunaan multiple parameter
+// penamaan parameter yang ada di dalam function boleh sembarangan, karena dia hanya tergantung urutan paramter yang dikirimkan.
+// artinya, parameter function pertama untuk paramater pertama yang dikirimkan
+$router->get('/post/{postId}/comments/{commentId}', function ($postId, $commentId) {
+    return 'Post ID = ' . $postId . 'Comment ID = ' . $commentId;
+});
+
+// cara memberikan parameter optional
+$router->get('/optional[/{param}]', function ($param = null) {
+    return $param;
+});
