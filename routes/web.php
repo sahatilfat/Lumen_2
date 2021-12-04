@@ -25,70 +25,78 @@ $router->get('/key', function () {
     return Str::random(32);
 });
 
-$router->get('/foo', function () {
-    return 'Hello, GET Method';
-});
+// $router->get('/foo', function () {
+//     return 'Hello, GET Method';
+// });
 
-$router->post('/bar', function () {
-    return 'Hello, POST Method';
-});
-
-
-// the router allows you to register routes that respond to any HTTP verb:
-$router->get('/get', function () {
-    return 'GET';
-});
-$router->post('/post', function () {
-    return 'POST';
-});
-$router->put('/put', function () {
-    return 'PUT';
-});
-$router->patch('/patch', function () {
-    return 'PATCH';
-});
-$router->delete('/delete', function () {
-    return 'Delete';
-});
-$router->options('/options', function () {
-    return 'OPTIONS';
-});
-
-// -----------------------------------
-$router->get('/user/{id}', function ($id) {
-    return 'User id : = ' . $id;
-});
+// $router->post('/bar', function () {
+//     return 'Hello, POST Method';
+// });
 
 
-// contoh penggunaan multiple parameter
-// penamaan parameter yang ada di dalam function boleh sembarangan, karena dia hanya tergantung urutan paramter yang dikirimkan.
-// artinya, parameter function pertama untuk paramater pertama yang dikirimkan
-$router->get('/post/{postId}/comments/{commentId}', function ($postId, $commentId) {
-    return 'Post ID = ' . $postId . 'Comment ID = ' . $commentId;
-});
+// // the router allows you to register routes that respond to any HTTP verb:
+// $router->get('/get', function () {
+//     return 'GET';
+// });
+// $router->post('/post', function () {
+//     return 'POST';
+// });
+// $router->put('/put', function () {
+//     return 'PUT';
+// });
+// $router->patch('/patch', function () {
+//     return 'PATCH';
+// });
+// $router->delete('/delete', function () {
+//     return 'Delete';
+// });
+// $router->options('/options', function () {
+//     return 'OPTIONS';
+// });
 
-// cara memberikan parameter optional
-$router->get('/optional[/{param}]', function ($param = null) {
-    return $param;
-});
+// // -----------------------------------
+// $router->get('/user/{id}', function ($id) {
+//     return 'User id : = ' . $id;
+// });
 
-// pneggunaan nama alias dalam route
-$router->get('profile', function () {
-    return redirect()->route('route.profile');
-});
 
-$router->get('profile/idstack', ['as' => 'route.profile', function () {
-    return 'Route IDStack';
+// // contoh penggunaan multiple parameter
+// // penamaan parameter yang ada di dalam function boleh sembarangan, karena dia hanya tergantung urutan paramter yang dikirimkan.
+// // artinya, parameter function pertama untuk paramater pertama yang dikirimkan
+// $router->get('/post/{postId}/comments/{commentId}', function ($postId, $commentId) {
+//     return 'Post ID = ' . $postId . 'Comment ID = ' . $commentId;
+// });
+
+// // cara memberikan parameter optional
+// $router->get('/optional[/{param}]', function ($param = null) {
+//     return $param;
+// });
+
+// // pneggunaan nama alias dalam route
+// $router->get('profile', function () {
+//     return redirect()->route('route.profile');
+// });
+
+// $router->get('profile/idstack', ['as' => 'route.profile', function () {
+//     return 'Route IDStack';
+// }]);
+
+
+// // Mengelompokkan route
+// $router->group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => ''], function () use ($router) {
+//     $router->get('home', function () {
+//         return 'Home Admin';
+//     });
+
+//     $router->get('profile', function () {
+//         return 'Profile Admin';
+//     });
+// });
+
+$router->get('/admin/home', ['middleware' => 'age', function () {
+    return 'Old Enough';
 }]);
 
-
-// Mengelompokkan route
-$router->group(['prefix' => 'admin'], function () use ($router) {
-    $router->get('home', function () {
-        return 'Home Admin';
-    });
-
-    $router->get('profile', function () {
-        return 'Profile Admin';
-    });
+$router->get('/fail', function () {
+    return "Not yet mature";
 });
