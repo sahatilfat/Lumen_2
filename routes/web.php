@@ -2,6 +2,9 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,4 +18,38 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+// Generate Application Key 
+$router->get('/key', function () {
+    return Str::random(32);
+});
+
+$router->get('/foo', function () {
+    return 'Hello, GET Method';
+});
+
+$router->post('/bar', function () {
+    return 'Hello, POST Method';
+});
+
+
+// the router allows you to register routes that respond to any HTTP verb:
+$router->get('/get', function () {
+    return 'GET';
+});
+$router->post('/post', function () {
+    return 'POST';
+});
+$router->put('/put', function () {
+    return 'PUT';
+});
+$router->patch('/patch', function () {
+    return 'PATCH';
+});
+$router->delete('/delete', function () {
+    return 'Delete';
+});
+$router->options('/options', function () {
+    return 'OPTIONS';
 });
