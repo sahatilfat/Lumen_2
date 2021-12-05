@@ -108,6 +108,8 @@ $router->get('/admin/home', ['middleware' => 'age', function () {
 $router->get('foo/bar', 'ExampleController@fooBar');
 $router->post('bar/foo', 'ExampleController@fooBar');
 
+$router->post('user/profile/request', 'ExampleController@userProfile');
+
 
 $router->get('/fail', function () {
     return "Not yet mature";
